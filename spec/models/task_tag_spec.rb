@@ -1,5 +1,5 @@
 require 'spec_helper'
 
-describe ProjectTag do
+RSpec.describe TaskTag, type: :model do
   pending "add some examples to (or delete) #{__FILE__}"
 end

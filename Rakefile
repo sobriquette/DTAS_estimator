@@ -4,4 +4,4 @@
 require File.expand_path('../config/application', __FILE__)
 require 'rake'
 
-CocoonSimpleFormDemo::Application.load_tasks
+Estimator::Application.load_tasks

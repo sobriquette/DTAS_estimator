@@ -11,50 +11,50 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20111014204318) do
+ActiveRecord::Schema.define(version: 20150413190950) do
 
-  create_table "people", force: true do |t|
-    t.string   "name"
-    t.string   "role"
-    t.string   "description"
+  create_table "people", force: :cascade do |t|
+    t.string   "name",        limit: 255
+    t.string   "role",        limit: 255
+    t.string   "description", limit: 255
     t.integer  "project_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "project_tags", force: true do |t|
-    t.integer  "project_id"
-    t.integer  "tag_id"
+  create_table "projects", force: :cascade do |t|
+    t.string   "name",        limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "projects", force: true do |t|
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "description"
+    t.string   "description", limit: 255
     t.integer  "owner_id"
   end
 
-  create_table "sub_tasks", force: true do |t|
-    t.string   "name"
-    t.string   "description"
+  create_table "sub_tasks", force: :cascade do |t|
+    t.string   "name",        limit: 255
+    t.string   "description", limit: 255
     t.boolean  "done"
     t.integer  "task_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "tags", force: true do |t|
-    t.string   "name"
+  create_table "tags", force: :cascade do |t|
+    t.string   "name",       limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "tasks", force: true do |t|
-    t.string   "name"
-    t.string   "description"
+  create_table "task_tags", force: :cascade do |t|
+    t.integer  "task_id"
+    t.integer  "tag_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "tasks", force: :cascade do |t|
+    t.string   "name",        limit: 255
+    t.string   "description", limit: 255
     t.integer  "project_id"
     t.datetime "created_at"
     t.datetime "updated_at"
