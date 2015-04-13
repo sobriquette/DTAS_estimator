@@ -165,10 +165,22 @@ GEM
     rb-inotify (0.9.5)
       ffi (>= 0.5.0)
     ref (1.0.5)
+<<<<<<< HEAD
+=======
+    rename (1.0.2)
+      rails (>= 3.0.0)
+>>>>>>> task-tags-model
     rspec (3.2.0)
       rspec-core (~> 3.2.0)
       rspec-expectations (~> 3.2.0)
       rspec-mocks (~> 3.2.0)
+<<<<<<< HEAD
+=======
+    rspec-activemodel-mocks (1.0.1)
+      activemodel (>= 3.0)
+      activesupport (>= 3.0)
+      rspec-mocks (>= 2.99, < 4.0)
+>>>>>>> task-tags-model
     rspec-core (3.2.3)
       rspec-support (~> 3.2.0)
     rspec-expectations (3.2.1)
@@ -258,6 +270,11 @@ DEPENDENCIES
   puma (= 2.11.1)
   rails (= 4.2.0)
   rails_12factor (= 0.0.2)
+<<<<<<< HEAD
+=======
+  rename
+  rspec-activemodel-mocks
+>>>>>>> task-tags-model
   rspec-rails (~> 3.0)
   sass-rails (= 5.0.1)
   simple_form (~> 3.1.0)

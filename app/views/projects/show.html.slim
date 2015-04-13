@@ -28,6 +28,10 @@ table.table
       td= task.name
       td= task.description
       td= task.done
+      -@task.tags.each do |task|
+        tr
+          td= @task.tag.name
+
 
 
 h3 People
@@ -38,13 +42,6 @@ table.table
       td= person.name
       td= person.role
       td= person.description
-
-h3 Tags
-
-table.table
-  -@project.tags.each do |tag|
-    tr
-      td= tag.name
 
 
 = link_to 'Edit', edit_project_path(@project)

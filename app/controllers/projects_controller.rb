@@ -86,9 +86,14 @@ class ProjectsController < ApplicationController
   def project_params
     params.require(:project).permit(
         :name, :description, :owner_id,
-        tasks_attributes: [:id, :_destroy, :name, :description,{sub_tasks_attributes: [:id, :_destroy, :name, :description]}],
-        people_attributes: [:id, :_destroy, :name],
-        project_tags_attributes: [:id, :_destroy, :tag_id, tag_attributes: [:id, :_destroy, :name]]
+        tasks_attributes: [:id, :_destroy, :name, :description,
+                            {sub_tasks_attributes: [:id, :_destroy, :name, :description]},
+                            {task_tags_attributes: [:id, :_destroy, :tag_id, 
+                              {tag_attributes: [:id, :_destroy, :name]}
+                            ]}
+                          ],
+        people_attributes: [:id, :_destroy, :name]
+        #project_tags_attributes: [:id, :_destroy, :tag_id, tag_attributes: [:id, :_destroy, :name]]
     )
   end
 end

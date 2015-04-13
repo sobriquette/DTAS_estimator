@@ -1,8 +1,9 @@
 source 'http://rubygems.org'
 
 gem 'rails', '4.2.0'
-
 gem 'therubyracer'
+gem 'rename'
+gem 'rspec-activemodel-mocks'
 
 # Asset template engines
 # Use SCSS for stylesheets
