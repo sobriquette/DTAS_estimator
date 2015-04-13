@@ -1,7 +1,11 @@
 CocoonSimpleFormDemo::Application.routes.draw do
+  root              'static_pages#home'
+  get   'help'    => 'static_pages#help'
+  get   'about'   => 'static_pages#about'
+  get   'contact' => 'static_pages#contact'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
-
 
   resources :projects
 
