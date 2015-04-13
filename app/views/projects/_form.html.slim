@@ -1,35 +1,38 @@
-= simple_form_for @project do |f|
+- provide(:title, "New project")
+.row
+  .project-form
+  = simple_form_for @project do |f|
 
-  - if errors.any?
-  == render 'shared/error_messages', object: f.object
+    - if @project.errors.any?
+      == render 'shared/error_messages', object: f.object
 
-  = f.input :name, :hint => 'The title of your project'
+    = f.input :name, :hint => 'The title of your project'
 
-  ul.nav.nav-tabs role='tablist'
-    li.active
-      = link_to 'Tasks', '#tasks', data: {toggle: 'tab'}
-    li
-      = link_to 'People', '#people', data: {toggle: 'tab'}
-    li
-      = link_to 'Owner', '#owner', data: {toggle: 'tab'}
+    ul.nav.nav-tabs role='tablist'
+      li.active
+        = link_to 'Tasks', '#tasks', data: {toggle: 'tab'}
+      li
+        = link_to 'People', '#people', data: {toggle: 'tab'}
+      li
+        = link_to 'Owner', '#owner', data: {toggle: 'tab'}
 
-  .tab-content
-    #tasks.tab-pane.active role='tabpanel'
-      = f.simple_fields_for :tasks do |task|
-        = render 'task_fields', :f => task
-      .links
-        = link_to_add_association 'add task', f, :tasks
+    .tab-content
+      #tasks.tab-pane.active role='tabpanel'
+        = f.simple_fields_for :tasks do |task|
+          = render 'task_fields', :f => task
+        .links
+          = link_to_add_association 'add task', f, :tasks
 
-    #people.tab-pane role='tabpanel'
-      = f.simple_fields_for :people do |person|
-        = render 'person_fields', :f => person
-      .links
-        = link_to_add_association 'add person', f, :people
+      #people.tab-pane role='tabpanel'
+        = f.simple_fields_for :people do |person|
+          = render 'person_fields', :f => person
+        .links
+          = link_to_add_association 'add person', f, :people
 
-    #owner.tab-pane role='tabpanel'
-      #owner_from_list
-        = f.association :owner, collection: Person.order(:name), prompt: 'Choose an existing owner'
-      = link_to_add_association 'add a new person as owner', f, :owner
+      #owner.tab-pane role='tabpanel'
+        #owner_from_list
+          = f.association :owner, collection: Person.order(:name), prompt: 'Choose an existing owner'
+        = link_to_add_association 'add a new person as owner', f, :owner
 
-  .actions
-    = f.button :submit, :disable_with => 'Please wait ...'
+    .links
+      = f.button :submit, :disable_with => 'Please wait ...', class: 'btn btn-primary btn-block'
