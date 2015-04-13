@@ -1,4 +1,8 @@
 = simple_form_for @project do |f|
+
+  - if errors.any?
+  == render 'shared/error_messages', object: f.object
+
   = f.input :name, :hint => 'The title of your project'
 
   ul.nav.nav-tabs role='tablist'
