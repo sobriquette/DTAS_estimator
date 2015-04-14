@@ -2,7 +2,8 @@
   .form-inline
     = f.input :name, :label => false, :placeholder => 'task name', class: 'form-control'
     = f.input :description, :label => false, :placeholder => 'add a description', class: 'form-control'
-    = f.input :complexity, collection: Task.complexities.keys, :selected => '', :label => false, :prompt => 'select complexity' 
+    = f.input :complexity, collection: Task.complexities.keys, :selected => '', :label => false, :prompt => 'select complexity'
+    = Task.average_time 
     = f.input :done, :as => :boolean, class: 'checkbox-inline'
     = link_to_remove_association f, data: {:confirm => 'do you really want to do this?'}, class: 'btn btn-default btn-xs' do
       .glyphicon.glyphicon-remove
@@ -15,4 +16,4 @@
     = f.simple_fields_for :task_tags do |task_tag|
         = render 'task_tag_fields', :f => task_tag
     .links
-      = link_to_add_association 'add a tag', f, :task_tags, class: 'btn btn-default' 
+      = link_to_add_association 'add a category', f, :task_tags, class: 'btn btn-default' 

@@ -8,5 +8,14 @@ class Task < ActiveRecord::Base
   accepts_nested_attributes_for :tags
   accepts_nested_attributes_for :task_tags, :allow_destroy => true
 
-  enum complexity: { low:1, medium: 2, high: 3 }
+  enum complexity: { low: 1, medium: 2, high: 3 }
+
+  # methods
+  	def self.tagged_with
+  		Tag.find_by_name!(:name).tasks
+  	end
+
+  	def self.average_time
+		  average(:actual_time).where(self.tagged_with)
+  	end
 end
