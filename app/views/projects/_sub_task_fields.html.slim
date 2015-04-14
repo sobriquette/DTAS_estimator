@@ -1,7 +1,7 @@
 .nested-fields
   .form-inline
-    b SubTask
-    = f.input :name, placeholder: 'name the subtask', label: false
+    b style="margin-right: 5px;" SubTask
+    = f.input :name, placeholder: 'subtask name', label: false
     = f.input :description, placeholder: 'add a description', label: false
     = link_to_remove_association f, class: 'btn btn-default btn-xs' do
       .glyphicon.glyphicon-remove

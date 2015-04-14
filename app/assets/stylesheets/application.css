@@ -9,8 +9,11 @@
 
 
 #tasks .input {
-    margin-left: 10px;
+    margin: 10px;
+    padding: 10px;
 }
+
+.form-inline > * { margin: 5px;}
 
 #tasks div.nested-fields table {
     margin-left: 150px;
@@ -18,6 +21,7 @@
 }
 
 #tasks label.boolean.optional {
+	margin: 10px;
     width: 50px;
 }
 
@@ -35,7 +39,7 @@ td.done_column { width: 80px; }
 #tasks > .nested-fields > .links > a.add_fields { margin-top: 2px; width:100%; display:block; margin-bottom: 20px; }
 #tasks > .links > a.add_fields { margin-top: 20px; width: 100%; display:block; border-top: 1px dashed silver; }
 
-.project-tag-fields { padding: 2px; border: 1px dashed #ddd; }
+.task-tag-fields { padding: 2px; border: 1px dashed #ddd; margin: 5px;}
 
 .sub_tasks { margin-left: 100px; }
 

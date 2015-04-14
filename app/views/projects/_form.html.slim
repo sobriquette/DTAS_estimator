@@ -6,7 +6,7 @@
     - if @project.errors.any?
       == render 'shared/error_messages', object: f.object
 
-    = f.input :name, :hint => 'The title of your project'
+    = f.input :name, :label => "Job code", :placeholder => 'Your project job code'
 
     ul.nav.nav-tabs role='tablist'
       li.active
@@ -21,18 +21,18 @@
         = f.simple_fields_for :tasks do |task|
           = render 'task_fields', :f => task
         .links
-          = link_to_add_association 'add task', f, :tasks
+          = link_to_add_association 'add task', f, :tasks, class: 'btn btn-default'
 
       #people.tab-pane role='tabpanel'
         = f.simple_fields_for :people do |person|
           = render 'person_fields', :f => person
         .links
-          = link_to_add_association 'add person', f, :people
+          = link_to_add_association 'add person', f, :people, class: 'btn btn-default'
 
-      #owner.tab-pane role='tabpanel'
+      #owner.tab-pane role='tabpanel' style="position: relative; left: 10px;"
         #owner_from_list
           = f.association :owner, collection: Person.order(:name), prompt: 'Choose an existing owner'
-        = link_to_add_association 'add a new person as owner', f, :owner
+        = link_to_add_association 'add new person as owner', f, :owner, class: 'btn btn-default'
 
     .links
       = f.button :submit, :disable_with => 'Please wait ...', class: 'btn btn-primary btn-block'
