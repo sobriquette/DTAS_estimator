@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150413190950) do
+ActiveRecord::Schema.define(version: 20150414153441) do
 
   create_table "people", force: :cascade do |t|
     t.string   "name",        limit: 255
@@ -59,6 +59,9 @@ ActiveRecord::Schema.define(version: 20150413190950) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "done"
+    t.integer  "complexity",              default: 1
+    t.integer  "est_time"
+    t.integer  "actual_time"
   end
 
 end

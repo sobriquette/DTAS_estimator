@@ -2,6 +2,7 @@
   .form-inline
     = f.input :name, :label => false, :placeholder => 'task name', class: 'form-control'
     = f.input :description, :label => false, :placeholder => 'add a description', class: 'form-control'
+    = f.input :complexity, collection: Task.complexities.keys, :selected => '', :label => false, :prompt => 'select complexity' 
     = f.input :done, :as => :boolean, class: 'checkbox-inline'
     = link_to_remove_association f, data: {:confirm => 'do you really want to do this?'}, class: 'btn btn-default btn-xs' do
       .glyphicon.glyphicon-remove

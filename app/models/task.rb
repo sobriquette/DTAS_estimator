@@ -7,4 +7,6 @@ class Task < ActiveRecord::Base
   accepts_nested_attributes_for :sub_tasks, :reject_if => :all_blank, :allow_destroy => true
   accepts_nested_attributes_for :tags
   accepts_nested_attributes_for :task_tags, :allow_destroy => true
+
+  enum complexity: { low:1, medium: 2, high: 3 }
 end
