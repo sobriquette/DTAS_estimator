@@ -1,6 +1,6 @@
 class Task < ActiveRecord::Base
-  has_many :sub_tasks
-  has_many :task_tags
+  has_many :sub_tasks, dependent: :destroy
+  has_many :task_tags, dependent: :delete_all
   has_many :tags, :through => :task_tags, :class_name => 'Tag'
 
 

@@ -12,7 +12,7 @@ table.table
         td
           = link_to 'Show', project, class: 'btn btn-default btn-xs'
           = link_to 'Edit', edit_project_path(project), class: 'btn btn-default btn-xs'
-          = link_to 'Destroy', project, :confirm => 'Are you sure?', :method => :delete, class: 'btn btn-xs btn-danger'
+          = link_to 'Destroy', project, data: {:confirm => 'Are you sure?'}, :method => :delete, class: 'btn btn-xs btn-danger'
 
 
 = link_to 'New Project', new_project_path
