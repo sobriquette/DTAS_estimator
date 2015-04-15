@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe "projects/edit.html.slim" do
+=begin
   before(:each) do
     @project = assign(:project, stub_model(Project,
       :name => "MyString"
@@ -15,4 +16,5 @@ describe "projects/edit.html.slim" do
       assert_select "input#project_name", :name => "project[name]"
     end
   end
+=end
 end
