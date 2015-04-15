@@ -1,5 +1,5 @@
 GEM
-  remote: http://rubygems.org/
+  remote: https://rubygems.org/
   specs:
     actionmailer (4.2.0)
       actionpack (= 4.2.0)
@@ -164,6 +164,7 @@ GEM
     rb-fsevent (0.9.4)
     rb-inotify (0.9.5)
       ffi (>= 0.5.0)
+    rdoc (4.2.0)
     ref (1.0.5)
     rename (1.0.2)
       rails (>= 3.0.0)
@@ -199,6 +200,9 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (~> 1.1)
+    sdoc (0.4.0)
+      json (~> 1.8)
+      rdoc (~> 4.0, < 5.0)
     shellany (0.0.1)
     simple_form (3.1.0)
       actionpack (~> 4.0)
@@ -253,7 +257,7 @@ DEPENDENCIES
   bootstrap-sass (~> 3.3.0)
   bootstrap-will_paginate (= 0.0.10)
   capybara
-  cocoon (~> 1.2.0)
+  cocoon
   coffee-rails (= 4.1.0)
   coffee-script
   guard-rspec
@@ -268,6 +272,7 @@ DEPENDENCIES
   rspec-activemodel-mocks
   rspec-rails (~> 3.0)
   sass-rails (= 5.0.1)
+  sdoc (= 0.4.0)
   simple_form (~> 3.1.0)
   slim
   slim-rails

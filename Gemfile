@@ -1,5 +1,6 @@
-source 'http://rubygems.org'
+source 'https://rubygems.org'
 
+# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.0'
 gem 'therubyracer'
 gem 'rename'
@@ -17,10 +18,11 @@ gem 'coffee-rails', '4.1.0'
 gem 'turbolinks', '2.3.0'
 # Build JSON APIs with ease
 gem 'jbuilder', '2.2.3'
-
+# bundle exec rake doc:rails generates teh API under doc/api
+gem 'sdoc', '0.4.0', group: :doc
 # gem 'cocoon', :path => '../cocoon'
 # gem 'cocoon', :git => 'https://github.com/nathanvda/cocoon'
-gem 'cocoon', '~> 1.2.0'
+gem 'cocoon'
 
 # use master version of simple-form for twitter-bootstrap integration
 gem 'simple_form', '~> 3.1.0'
