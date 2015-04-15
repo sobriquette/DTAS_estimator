@@ -20,10 +20,10 @@
 /spring/*.pid
 
 
-tmp/**/*
-.rvmrc
-.idea
+#tmp/**/*
+#.rvmrc
+#.idea
 
-.sass-cache/
-public/assets
+#.sass-cache/
+#public/assets
 
