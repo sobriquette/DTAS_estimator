@@ -1,18 +1,18 @@
 .nested-fields.well.well-compact
-  .form-inline
-    = f.input :name, :label => false, :placeholder => 'task name', class: 'form-control'
-    = f.input :description, :label => false, :placeholder => 'add a description', class: 'form-control'
-    = f.input :complexity, collection: Task.complexities.keys, :selected => '', :label => false, :prompt => 'select complexity'
-    = f.input :done, :as => :boolean, class: 'checkbox-inline'
-    = link_to_remove_association f, data: {:confirm => 'do you really want to do this?'}, class: 'btn btn-default btn-xs' do
-      .glyphicon.glyphicon-remove
-  .sub_tasks style="position: relative; left: -50px;"
-    = f.simple_fields_for :sub_tasks do |sub_task|
-      = render 'sub_task_fields', :f => sub_task
-    .links style="position: relative; left: -55px;"
-      = link_to_add_association 'add sub-task', f, :sub_tasks, class: 'btn btn-default'
-  .task_tags style="position: relative; left: -5px;"
-    = f.simple_fields_for :task_tags do |task_tag|
-        = render 'task_tag_fields', :f => task_tag
-    .links
-      = link_to_add_association 'add a category', f, :task_tags, class: 'btn btn-default' 
+	.task_tags style="position: relative; left: -5px;"
+		= f.simple_fields_for :task_tags do |task_tag|
+		    = render 'task_tag_fields', :f => task_tag
+		.links
+		  = link_to_add_association 'add a category', f, :task_tags, class: 'btn btn-default' 
+	.form-inline
+		= f.input :name, :label => false, :placeholder => 'task name', class: 'form-control'
+		= f.input :description, :label => false, :placeholder => 'add a description', class: 'form-control'
+		= f.input :complexity, collection: Task.complexities.keys, :selected => '', :label => false, :prompt => 'select complexity'
+		= f.input :done, :as => :boolean, class: 'checkbox-inline'
+		= link_to_remove_association f, data: {:confirm => 'do you really want to do this?'}, class: 'btn btn-default btn-xs' do
+		  .glyphicon.glyphicon-remove
+	.sub_tasks style="position: relative; left: -50px;"
+		= f.simple_fields_for :sub_tasks do |sub_task|
+		  = render 'sub_task_fields', :f => sub_task
+		.links style="position: relative; left: -55px;"
+		  = link_to_add_association 'add sub-task', f, :sub_tasks, class: 'btn btn-default'
