@@ -44,7 +44,7 @@ class ProjectsController < ApplicationController
 
     respond_to do |format|
       if @project.save
-        format.html { redirect_to(@project, :notice => 'Project was successfully created.') }
+        format.html { redirect_to(@project, :flash => { :success => 'Project was successfully created.'} ) }
         format.xml  { render :xml => @project, :status => :created, :location => @project }
       else
         format.html { render :action => "new" }
@@ -86,14 +86,13 @@ class ProjectsController < ApplicationController
   def project_params
     params.require(:project).permit(
         :name, :description, :owner_id,
-        tasks_attributes: [:id, :_destroy, :name, :description,
+        tasks_attributes: [:id, :_destroy, :name, :description, :complexity, :actual_time,
                             {sub_tasks_attributes: [:id, :_destroy, :name, :description]},
                             {task_tags_attributes: [:id, :_destroy, :tag_id, 
                               {tag_attributes: [:id, :_destroy, :name]}
                             ]}
                           ],
         people_attributes: [:id, :_destroy, :name]
-        #project_tags_attributes: [:id, :_destroy, :tag_id, tag_attributes: [:id, :_destroy, :name]]
     )
   end
 end

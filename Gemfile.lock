@@ -1,5 +1,5 @@
 GEM
-  remote: http://rubygems.org/
+  remote: https://rubygems.org/
   specs:
     actionmailer (4.2.0)
       actionpack (= 4.2.0)
@@ -38,14 +38,10 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.3.8)
     arel (6.0.0)
-    autoprefixer-rails (5.1.9)
-      execjs
-      json
     binding_of_caller (0.7.3.pre1)
       debug_inspector (>= 0.0.1)
-    bootstrap-sass (3.3.4.1)
-      autoprefixer-rails (>= 5.0.0.1)
-      sass (>= 3.2.19)
+    bootstrap-sass (3.2.0.0)
+      sass (~> 3.2)
     bootstrap-will_paginate (0.0.10)
       will_paginate
     builder (3.2.2)
@@ -164,6 +160,8 @@ GEM
     rb-fsevent (0.9.4)
     rb-inotify (0.9.5)
       ffi (>= 0.5.0)
+    rdoc (4.2.0)
+      json (~> 1.4)
     ref (1.0.5)
     rename (1.0.2)
       rails (>= 3.0.0)
@@ -171,10 +169,6 @@ GEM
       rspec-core (~> 3.2.0)
       rspec-expectations (~> 3.2.0)
       rspec-mocks (~> 3.2.0)
-    rspec-activemodel-mocks (1.0.1)
-      activemodel (>= 3.0)
-      activesupport (>= 3.0)
-      rspec-mocks (>= 2.99, < 4.0)
     rspec-core (3.2.3)
       rspec-support (~> 3.2.0)
     rspec-expectations (3.2.1)
@@ -199,6 +193,9 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (~> 1.1)
+    sdoc (0.4.0)
+      json (~> 1.8)
+      rdoc (~> 4.0, < 5.0)
     shellany (0.0.1)
     simple_form (3.1.0)
       actionpack (~> 4.0)
@@ -250,10 +247,10 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bootstrap-sass (~> 3.3.0)
+  bootstrap-sass (= 3.2.0.0)
   bootstrap-will_paginate (= 0.0.10)
   capybara
-  cocoon (~> 1.2.0)
+  cocoon
   coffee-rails (= 4.1.0)
   coffee-script
   guard-rspec
@@ -265,9 +262,9 @@ DEPENDENCIES
   rails (= 4.2.0)
   rails_12factor (= 0.0.2)
   rename
-  rspec-activemodel-mocks
   rspec-rails (~> 3.0)
   sass-rails (= 5.0.1)
+  sdoc (= 0.4.0)
   simple_form (~> 3.1.0)
   slim
   slim-rails
