@@ -2,7 +2,7 @@
 
 	.form-inline
 		.tag_from_list style="display: inline;"
-			= f.association :tag, collection: Tag.order(:name), prompt: 'Choose a category', label: false
+			= f.association :tag, collection: Tag.order(:name), prompt: 'Choose a category', label: false, class: 'select_tag'
 		= link_to_add_association 'or create a new category', f, :tag, class: 'add-tag',
 			'data-association-insertion-method' => 'after'
 		= link_to_remove_association f, class: 'remove-tag btn btn-default btn-xs' do 

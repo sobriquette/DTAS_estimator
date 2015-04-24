@@ -7,7 +7,9 @@ Estimator::Application.routes.draw do
   get 'contact' =>  'static_pages#contact'
   get 'newprojects' => 'projects#new'
 
-  resources :projects
+  resources :projects do
+    get :est_time, on: :collection
+  end
 
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
