@@ -10,7 +10,26 @@ class Task < ActiveRecord::Base
 
   enum complexity: { low: 1, medium: 2, high: 3 }
 
-  # methods
+  #validations
+  validates_presence_of :name, :description, :complexity
+  validates :name, length: { maximum: 50 }
+  validates :description, length: { maximum: 140 }
+=begin
+  validates :actual_time, numericality: { :greater_than_or_equal_to => 0,
+  :less_than_or_equal_to => 100 },
+  format: { :with => /\A\d+(?:\.\d{0,1})?\z/,
+  message: "accepts only decimals to nearest tenth" }
+=end
+  validate :check_task_tags
+  
+  private
+    def check_task_tags
+      if self.task_tags.size < 1 || self.task_tags.all? {|task_tags| task_tags.marked_for_destruction? }
+      errors.add(:base, "Please add a category.")
+      end
+    end
+    
+    # methods
   	def self.tagged_with
   		Tag.find_by_name!(:name).tasks
   	end
