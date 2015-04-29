@@ -94,9 +94,39 @@ class ProjectsController < ApplicationController
           people_attributes: [:id, :_destroy, :name]
       )
     end
+    
 =begin    
-    def est_time
-      @current_project.est_time
+    def show_est_time
+      if @category.exists?
+        @est_time = calculate_est_time
+      else
+        @est_time = #default value
+      end
     end
+    
+    def tagged_with
+  		Tag.find_by_name!(:name).tasks
+  	end
+
+  	def average_time
+		  @average_time = average(:actual_time).where(self.tagged_with)
+		  return @average_time
+  	end
+  	
+    def calculate_est_time
+      params[:project][:tasks_attributes].values.find_each do |task|
+        @complexity = task[:complexity]
+      end
+      @average_time = average_time
+      @est_time = @complexity * @average_time
+      return @est_time
+    end
+    
+    #def category_exists
+      #params[:project][:tasks_attributes][:task_tags_attributes].values.find_each do |task_tag|
+      #  @category = task_tag[:name]
+      #end if params[:project] and params[:project][:tasks_attributes]
+    #end
 =end
+
 end
