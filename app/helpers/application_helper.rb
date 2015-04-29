@@ -8,4 +8,12 @@ module ApplicationHelper
 	    "#{page_title} | #{base_title}"
 	  end
 	end
+	
+	# Presenters
+	def present(model, presenter_class = nil)
+		klass ||= "#{model.class}Presenter".constantize
+		presenter = klass.new(model, self)
+		yield presenter if block_given?
+		return presenter
+	end
 end

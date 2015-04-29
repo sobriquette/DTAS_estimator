@@ -25,7 +25,7 @@ class ProjectsController < ApplicationController
   # GET /projects/new.xml
   def new
     @project = Project.new
-
+  
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @project }
