@@ -1,5 +1,4 @@
 class Task < ActiveRecord::Base
-  before_save :display_est_time
   has_many :sub_tasks, dependent: :destroy
   has_many :task_tags, dependent: :delete_all
   has_many :tags, :through => :task_tags, :class_name => 'Tag'
@@ -22,6 +21,25 @@ class Task < ActiveRecord::Base
   message: "accepts only decimals to nearest tenth" }
 =end
   validate :check_task_tags
+    
+  def self.tagged_with
+  	Tag.find_by_name!(:name).tasks
+  end
+
+	def self.average_time
+	  @avg = average(:actual_time).where(self.tagged_with)
+	  return @avg
+	end
+  	
+	def calculate_est_time
+    @avg = self.average_time
+    @est_time = @avg * self.complexity
+    return @est_time
+	end
+  	
+	def display_est_time
+	  self.tagged_with ? calculate_est_time : '1'
+	end
   
   private
     def check_task_tags
@@ -29,23 +47,4 @@ class Task < ActiveRecord::Base
       errors.add(:base, "Please add a category.")
       end
     end
-    
-  	def self.tagged_with
-  		Tag.find_by_name!(:name).tasks
-  	end
-
-  	def self.average_time
-		  @avg = average(:actual_time).where(self.tagged_with)
-		  return @avg
-  	end
-  	
-  	def calculate_est_time
-  	  @avg = self.average_time
-  	  @est_time = @avg * self.complexity
-  	  return @est_time
-  	end
-  	
-  	def display_est_time
-  	  self.tagged_with ? calculate_est_time : '1'
-  	end
 end

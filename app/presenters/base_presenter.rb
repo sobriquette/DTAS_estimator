@@ -1,20 +1,21 @@
-class BasePresenter < SimpleDelegator
-    def initialize(model, view)
-        @model, @view = model, view
-        super(@model)
-    end
-    
-    def self.presents(name)
-       define_method(name) do
-           @model
-       end
-    end
-       
-    def h 
-        @view
-    end
-    
-    def method_missing(*args, &block)
-        @view.send(*args, &block)
+module Presenter
+    class BasePresenter
+        def initialize(object, template)
+            @object, @template = object, template
+        end
+        
+        def self.presents(name)
+           define_method(name) do
+               @object
+           end
+        end
+           
+        def h 
+            @template
+        end
+        
+        def method_missing(*args, &block)
+            @template.send(*args, &block)
+        end
     end
 end
