@@ -1,4 +1,5 @@
 class Task < ActiveRecord::Base
+	before_save :display_est_time
 	has_many :sub_tasks, dependent: :destroy
 	has_many :task_tags, dependent: :delete_all
 	has_many :tags, :through => :task_tags, :class_name => 'Tag'
@@ -14,15 +15,14 @@ class Task < ActiveRecord::Base
 	validates_presence_of :name, :description, :complexity
 	validates :name, length: { maximum: 50 }
 	validates :description, length: { maximum: 140 }
-=begin
 	validates :actual_time, numericality: { :greater_than_or_equal_to => 0,
-	:less_than_or_equal_to => 100 },
-	format: { :with => /\A\d+(?:\.\d{0,1})?\z/,
-	message: "accepts only decimals to nearest tenth" }
-=end
-	validate :check_task_tags
+							:less_than_or_equal_to => 100 },
+							format: { :with => /\A\d+(?:\.\d{0,1})?\z/,
+							message: "accepts only decimals to nearest tenth" }
+	#validate :check_task_tags
 		
-	def self.tagged_with
+	#Task.joins(:tags).where(tag.name==params[:tag_name]).average(:actual_time)	
+	def tagged_with
 		Tag.find_by_name!(:name).tasks
 	end
 

@@ -6,12 +6,12 @@ class TaskPresenter < BasePresenter
       task.tagged_with ? calculate_est_time : '1'
    end
    
-   def self.tagged_with
+   def tagged_with
   		Tag.find_by_name!(:name).tasks
    end
 
-  	def self.average_time
-		@avg = average(:actual_time).where(self..tagged_with)
+  	def average_time
+		@avg = average(:actual_time).where(self.tagged_with)
 		return @avg
   	end
   	

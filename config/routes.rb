@@ -8,7 +8,7 @@ Estimator::Application.routes.draw do
   get 'newprojects' => 'projects#new'
 
   resources :projects do
-    get :est_time, on: :collection
+    get :display_est_time, on: :collection
   end
 
   # Sample of regular route:

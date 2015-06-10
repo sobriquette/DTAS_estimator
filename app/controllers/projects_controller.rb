@@ -25,7 +25,7 @@ class ProjectsController < ApplicationController
   # GET /projects/new.xml
   def new
     @project = Project.new
-  
+    #@tag_estimates = Tag.joins(:tasks).
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @project }
@@ -81,6 +81,14 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def display_est_time
+    if @category.exists?
+      @est_time = calculate_est_time
+    else
+      @est_time = 1
+    end
+  end
+
   private
     def project_params
       params.require(:project).permit(
@@ -95,18 +103,10 @@ class ProjectsController < ApplicationController
       )
     end
     
-=begin    
-    def show_est_time
-      if @category.exists?
-        @est_time = calculate_est_time
-      else
-        @est_time = #default value
-      end
-    end
-    
+=begin
     def tagged_with
   		Tag.find_by_name!(:name).tasks
-  	end
+    end
 
   	def average_time
 		  @average_time = average(:actual_time).where(self.tagged_with)

@@ -56,6 +56,11 @@ $(document).ready(function() {
         $(this).data('remove-timeout', 1000);
         task.fadeOut('slow');
     })
+    
+    //$('.tag-from-list').change(function() {
+    //        var category = $(this).val();
+    //        $.ajax("/projects/display_est_time");
+    //});
 
     //$('body').tabs();
 });
