@@ -11,28 +11,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150414153441) do
+ActiveRecord::Schema.define(version: 20150615181200) do
 
   create_table "people", force: :cascade do |t|
-    t.string   "name",        limit: 255
-    t.string   "role",        limit: 255
-    t.string   "description", limit: 255
+    t.string   "name"
+    t.string   "role"
+    t.string   "description"
     t.integer  "project_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "projects", force: :cascade do |t|
-    t.string   "name",        limit: 255
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "description", limit: 255
+    t.string   "description"
     t.integer  "owner_id"
   end
 
   create_table "sub_tasks", force: :cascade do |t|
-    t.string   "name",        limit: 255
-    t.string   "description", limit: 255
+    t.string   "name"
+    t.string   "description"
     t.boolean  "done"
     t.integer  "task_id"
     t.datetime "created_at"
@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(version: 20150414153441) do
   end
 
   create_table "tags", force: :cascade do |t|
-    t.string   "name",       limit: 255
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -52,14 +52,18 @@ ActiveRecord::Schema.define(version: 20150414153441) do
     t.datetime "updated_at"
   end
 
+  add_index "task_tags", ["tag_id"], name: "index_task_tags_on_tag_id"
+  add_index "task_tags", ["task_id", "tag_id"], name: "index_task_tags_on_task_id_and_tag_id", unique: true
+  add_index "task_tags", ["task_id"], name: "index_task_tags_on_task_id"
+
   create_table "tasks", force: :cascade do |t|
-    t.string   "name",        limit: 255
-    t.string   "description", limit: 255
+    t.string   "name"
+    t.string   "description"
     t.integer  "project_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "done"
-    t.integer  "complexity",              default: 1
+    t.integer  "complexity",  default: 1
     t.integer  "est_time"
     t.integer  "actual_time"
   end

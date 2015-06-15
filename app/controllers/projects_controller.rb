@@ -25,6 +25,10 @@ class ProjectsController < ApplicationController
   # GET /projects/new.xml
   def new
     @project = Project.new
+    task = @project.tasks.build
+    puts task.inspect
+    task.task_tags.build.build_tag
+    puts tag.inspect
 
     respond_to do |format|
       format.html # new.html.erb
@@ -44,7 +48,7 @@ class ProjectsController < ApplicationController
 
     respond_to do |format|
       if @project.save
-        format.html { redirect_to(@project, :notice => 'Project was successfully created.') }
+        format.html { redirect_to(@project, :flash => { :success => 'Project was successfully created.'}) }
         format.xml  { render :xml => @project, :status => :created, :location => @project }
       else
         format.html { render :action => "new" }
@@ -57,10 +61,11 @@ class ProjectsController < ApplicationController
   # PUT /projects/1.xml
   def update
     @project = Project.find(params[:id])
+    params[:project][:tag_ids] ||= []
 
     respond_to do |format|
       if @project.update_attributes(project_params)
-        format.html { redirect_to(@project, :notice => 'Project was successfully updated.') }
+        format.html { redirect_to(@project, :flash => { :success => 'Project was successfully updated.'}) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -72,11 +77,10 @@ class ProjectsController < ApplicationController
   # DELETE /projects/1
   # DELETE /projects/1.xml
   def destroy
-    @project = Project.find(params[:id])
-    @project.destroy
+    @project = Project.find(params[:id]).destroy
 
     respond_to do |format|
-      format.html { redirect_to(projects_url) }
+      format.html { redirect_to(projects_url, :flash => { :success => 'Project deleted'}) }
       format.xml  { head :ok }
     end
   end
@@ -84,16 +88,13 @@ class ProjectsController < ApplicationController
   private
 
   def project_params
-    params.require(:project).permit(
-        :name, :description, :owner_id,
-        tasks_attributes: [:id, :_destroy, :name, :description,
-                            {sub_tasks_attributes: [:id, :_destroy, :name, :description]},
-                            {task_tags_attributes: [:id, :_destroy, :tag_id, 
-                              {tag_attributes: [:id, :_destroy, :name]}
-                            ]}
-                          ],
-        people_attributes: [:id, :_destroy, :name]
-        #project_tags_attributes: [:id, :_destroy, :tag_id, tag_attributes: [:id, :_destroy, :name]]
+    params.require(:project).permit(:name, :description, :owner_id,
+                                      tasks_attributes: [:id, :_destroy, :name, :description, :done, :complexity, :actual_time,
+                           	                             {sub_tasks_attributes: [:id, :_destroy, :name, :description]},
+                           	                             {task_tags_attributes: [:id, :_destroy, :tag_id, 
+                              	                           {tag_attributes: [:id, :_destroy, :name]}
+                                                         ], :tag_ids => []}
+                                      ], people_attributes: [:id, :_destroy, :name]
     )
   end
 end

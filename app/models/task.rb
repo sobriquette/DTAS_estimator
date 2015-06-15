@@ -3,9 +3,8 @@ class Task < ActiveRecord::Base
 	has_many :task_tags, dependent: :delete_all
 	has_many :tags, :through => :task_tags, :class_name => 'Tag'
 
-
 	accepts_nested_attributes_for :sub_tasks, :reject_if => :all_blank, :allow_destroy => true
-	accepts_nested_attributes_for :tags
+	accepts_nested_attributes_for :tags, reject_if: :all_blank
 	accepts_nested_attributes_for :task_tags, :allow_destroy => true
 
 	enum complexity: { low:1, medium: 2, high: 3 }
@@ -20,13 +19,17 @@ class Task < ActiveRecord::Base
 									   	  format: { :with => /\A\d+(?:\.\d{0,1})?\z/, 
 									   	  message: "accepts only decimals to nearest tenth" }
 =end
-	validate :check_task_tags
+	#validate :check_task_tags
 	
 	private
 	  	def check_task_tags
 	  		if self.task_tags.size < 1 || self.task_tags.all? {|task_tags| task_tags.marked_for_destruction? }
 				errors.add(:base, "Please add a category.")
 			end
+	  	end
+
+	  	def calculate_est_duration
+	  		#avg = Task.joins(:tags).where(Tag.name==params[:tag_name]).average(:actual_time * :complexity)
 	  	end
 
 end
