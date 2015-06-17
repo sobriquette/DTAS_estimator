@@ -13,6 +13,7 @@ class Task < ActiveRecord::Base
 	validates_presence_of :name, :description, :complexity
 	validates :name, length: { maximum: 50 }
 	validates :description, length: { maximum: 140 }
+
 =begin
 	validates :actual_time, numericality: { :greater_than_or_equal_to => 0, 
 										  :less_than_or_equal_to => 100 }, 
@@ -21,15 +22,19 @@ class Task < ActiveRecord::Base
 =end
 	#validate :check_task_tags
 	
-	private
-	  	def check_task_tags
-	  		if self.task_tags.size < 1 || self.task_tags.all? {|task_tags| task_tags.marked_for_destruction? }
-				errors.add(:base, "Please add a category.")
-			end
-	  	end
+	def est_time
+		500
+	  		#avg = Task.find_by_sql("SELECT AVG(tasks.actual_time * tasks.complexity) FROM tasks INNER JOIN task_tags 
+	  		#	  									ON task_tags.task_id = tasks.id INNER JOIN tags 
+	  		#	  									ON tags.id = task_tags.tag_id WHERE tags.name = 'Carousel' ")
+	end
 
-	  	def calculate_est_duration
-	  		#avg = Task.joins(:tags).where(Tag.name==params[:tag_name]).average(:actual_time * :complexity)
-	  	end
+	private
+
+  	def check_task_tags
+  		if self.task_tags.size < 1 || self.task_tags.all? {|task_tags| task_tags.marked_for_destruction? }
+			errors.add(:base, "Please add a category.")
+		end
+  	end
 
 end

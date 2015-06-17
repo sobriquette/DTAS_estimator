@@ -26,9 +26,7 @@ class ProjectsController < ApplicationController
   def new
     @project = Project.new
     task = @project.tasks.build
-    puts task.inspect
     task.task_tags.build.build_tag
-    puts tag.inspect
 
     respond_to do |format|
       format.html # new.html.erb
@@ -89,7 +87,7 @@ class ProjectsController < ApplicationController
 
   def project_params
     params.require(:project).permit(:name, :description, :owner_id,
-                                      tasks_attributes: [:id, :_destroy, :name, :description, :done, :complexity, :actual_time,
+                                      tasks_attributes: [:id, :_destroy, :name, :description, :done, :complexity, :actual_time, :est_time,
                            	                             {sub_tasks_attributes: [:id, :_destroy, :name, :description]},
                            	                             {task_tags_attributes: [:id, :_destroy, :tag_id, 
                               	                           {tag_attributes: [:id, :_destroy, :name]}
