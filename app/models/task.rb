@@ -23,10 +23,10 @@ class Task < ActiveRecord::Base
 	#validate :check_task_tags
 	
 	def est_time
-		500
-	  		#avg = Task.find_by_sql("SELECT AVG(tasks.actual_time * tasks.complexity) FROM tasks INNER JOIN task_tags 
-	  		#	  									ON task_tags.task_id = tasks.id INNER JOIN tags 
-	  		#	  									ON tags.id = task_tags.tag_id WHERE tags.name = 'Carousel' ")
+  		# avg = Task.find_by_sql("SELECT AVG(tasks.actual_time * tasks.complexity) FROM tasks INNER JOIN task_tags 
+  		# 	  									ON task_tags.task_id = tasks.id INNER JOIN tags 
+  		# 	  									ON tags.id = task_tags.tag_id WHERE tags.name = 'Navigation'")
+  		avg = Task.joins(:tags).where("tags.name =? ", "Carousel").average("actual_time * complexity")
 	end
 
 	private

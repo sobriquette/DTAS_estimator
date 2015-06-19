@@ -21,8 +21,8 @@ table.table
     td Task
     td Description
     td Complexity
-    td Estimated Duration
-    td Actual Duration
+    td Estimated Hours
+    td Actual Hours
     td Completed?
     td Category
   -@project.tasks.each do |task|
@@ -34,6 +34,8 @@ table.table
       td= task.actual_time
       td= task.done
       td= task.tags.name
+      / -@task.tags.each do |tag|
+      /   td= tag.name
 
 
 
