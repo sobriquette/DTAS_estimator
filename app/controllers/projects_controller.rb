@@ -83,6 +83,10 @@ class ProjectsController < ApplicationController
     end
   end
 
+  # def show_est_time
+  #   @time_text = params[:project][:task_attributes][:task_tags_attributes][:tag_id][:name]
+  # end
+
   private
 
   def project_params

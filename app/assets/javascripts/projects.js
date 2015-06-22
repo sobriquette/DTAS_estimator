@@ -58,4 +58,14 @@ $(document).ready(function() {
     })
 
     //$('body').tabs();
+
+    // $('#tag_id').change(function() {
+    //     $.ajax({
+    //         url: "<%= show_est_time_path %>",
+    //         data: {
+    //             project[task_attributes][task_tags_attributes][tag_id]: $("#tag_id option:selected").text()
+    //         },
+    //         dataType: "script"
+    //     });
+    // });
 });

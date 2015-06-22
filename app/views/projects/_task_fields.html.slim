@@ -5,14 +5,15 @@
     .links
       = link_to_add_association 'add a category', f, :task_tags, class: 'btn btn-default'
   .form-inline
-    = f.input :name, :label => false, :placeholder => 'add a name', class: 'form-control'
-    = f.input :description, :label => false, :placeholder => 'add a description', class: 'form-control'
-    = f.input :complexity, collection: Task.complexities.keys, :selected => '', :label => false, :prompt => 'select complexity' 
-
-    = f.input :actual_time, :label => false, :placeholder => 'actual duration', class: 'form-control',
+    = f.input :name, label: false, placeholder: 'add a name', class: 'form-control'
+    = f.input :description, label: false, placeholder: 'add a description', class: 'form-control'
+    = f.input :complexity, collection: Task.complexities.keys, selected: '', label: false, prompt: 'select complexity' 
+    / = f.input :est_time, :label => false, :placeholder=> 'estimated hours', :id => 'est_time', class: 'form-control'
+    / div id="show_est_time"
+    = f.input :actual_time, label: false, placeholder: 'actual hours', class: 'form-control',
               :input_html => {min: '0', step: '0.5', max: '100'}
-    = f.input :done, :as => :boolean, class: 'checkbox-inline'
-    = link_to_remove_association f, data: {:confirm => 'are you sure?'}, class: 'btn btn-default btn-xs' do
+    = f.input :done, as: :boolean, class: 'checkbox-inline'
+    = link_to_remove_association f, data: {confirm: 'are you sure?'}, class: 'btn btn-default btn-xs' do
       .glyphicon.glyphicon-remove
   .sub_tasks style="position: relative; left: -50px;"
     = f.simple_fields_for :sub_tasks do |sub_task|

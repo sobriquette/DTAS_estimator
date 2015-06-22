@@ -33,9 +33,11 @@ table.table
       td= task.est_time
       td= task.actual_time
       td= task.done
-      td= task.tags.name
+      td= task.tags.first.name
       / -@task.tags.each do |tag|
       /   td= tag.name
+  / tr
+  /   td= @project.task.sum_est_time
 
 
 

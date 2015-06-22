@@ -20,13 +20,17 @@ class Task < ActiveRecord::Base
 									   	  format: { :with => /\A\d+(?:\.\d{0,1})?\z/, 
 									   	  message: "accepts only decimals to nearest tenth" }
 =end
-	#validate :check_task_tags
+	validate :check_task_tags
 	
 	def est_time
   		# avg = Task.find_by_sql("SELECT AVG(tasks.actual_time * tasks.complexity) FROM tasks INNER JOIN task_tags 
   		# 	  									ON task_tags.task_id = tasks.id INNER JOIN tags 
   		# 	  									ON tags.id = task_tags.tag_id WHERE tags.name = 'Navigation'")
-  		avg = Task.joins(:tags).where("tags.name =? ", "Carousel").average("actual_time * complexity")
+  		avg = Task.joins(:tags).where("tags.name = ? ", self.tags.first.name ).average("actual_time * complexity")
+	end
+
+	def sum_est_time
+		self.class.est_time.sum
 	end
 
 	private
