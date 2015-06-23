@@ -6,7 +6,7 @@ Estimator::Application.routes.draw do
   get 'about'   =>  'static_pages#about'
   get 'contact' =>  'static_pages#contact'
   get 'newprojects' => 'projects#new'
-  # get 'newprojects/show_est_time', as: "show_est_time"
+  get 'newprojects/show_est_time' => 'projects#show_est_time'
 
   resources :projects
 

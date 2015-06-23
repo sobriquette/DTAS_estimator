@@ -29,15 +29,11 @@ class Task < ActiveRecord::Base
   		avg = Task.joins(:tags).where("tags.name = ? ", self.tags.first.name ).average("actual_time * complexity")
 	end
 
-	def sum_est_time
-		self.class.est_time.sum
-	end
-
 	private
 
   	def check_task_tags
   		if self.task_tags.size < 1 || self.task_tags.all? {|task_tags| task_tags.marked_for_destruction? }
-			errors.add(:base, "Please add a category.")
+			errors.add(:base, "Please select a tag.")
 		end
   	end
 
