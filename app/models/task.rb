@@ -26,7 +26,12 @@ class Task < ActiveRecord::Base
   		# avg = Task.find_by_sql("SELECT AVG(tasks.actual_time * tasks.complexity) FROM tasks INNER JOIN task_tags 
   		# 	  									ON task_tags.task_id = tasks.id INNER JOIN tags 
   		# 	  									ON tags.id = task_tags.tag_id WHERE tags.name = 'Navigation'")
-  		avg = Task.joins(:tags).where("tags.name = ? ", self.tags.first.name ).average("actual_time * complexity")
+  		
+  		# average actual times
+  		avg = Task.joins(:tags).where("tags.name = ? ", self.tags.first.name ).average("actual_time")
+  		# calculate est time based on complexity selected
+  		est_time = avg * self[:complexity]
+  		return est_time
 	end
 
 	private

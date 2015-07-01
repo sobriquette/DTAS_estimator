@@ -59,11 +59,12 @@ $(document).ready(function() {
 
     //$('body').tabs();
 
-    $('#project_tasks_attributes_0_task_tags_attributes_0_tag_id').change(function() {
+    $('#project_tasks_attributes_0_complexity').change(function() {
         $.ajax({
             url: "/newprojects/show_est_time",
             data: {
-                tag_id: $("#project_tasks_attributes_0_task_tags_attributes_0_tag_id option:selected").text()
+                tag_id: $("#project_tasks_attributes_0_task_tags_attributes_0_tag_id option:selected").text(),
+                complexity_id: $("#project_tasks_attributes_0_complexity option:selected").text()
             },
             dataType: "script"
         });

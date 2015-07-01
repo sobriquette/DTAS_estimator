@@ -6,6 +6,6 @@ class Tag < ActiveRecord::Base
 
 
 	def self.est_time(tag_id)
-  		avg = Tag.joins(:tasks).where("tags.name = ? ", tag_id ).average("actual_time * complexity")
+  		avg = Tag.joins(:tasks).where("tags.name = ? ", tag_id ).average("actual_time")
 	end
 end
