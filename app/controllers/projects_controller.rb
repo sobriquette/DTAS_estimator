@@ -84,9 +84,13 @@ class ProjectsController < ApplicationController
   end
 
   def show_est_time
-    avg_time = Tag.est_time(params[:tag_id]) 
+    avg_time = Tag.est_time(params[:tag_id])
+    puts "this is the average: #{avg_time}"
     complexity_id = params[:complexity_id]
-    @time_text = avg_time * Task.complexities["complexity_id"]
+    puts "this is the select: #{complexity_id}"
+    # mapping = Task.complexities[params[:complexity_id]]
+    # puts "this is the enum mapping: #{mapping}"
+    @time_text = avg_time * Task.complexities[params[:complexity_id]]
   end
 
   private
