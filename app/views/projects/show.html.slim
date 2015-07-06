@@ -33,7 +33,10 @@ table.table
       td= task.est_time
       td= task.actual_time
       td= task.done
-      td= task.tags.first.name
+      - if task.tags.exists?
+        td= task.tags.first.name
+      - else
+        td= ""
       / -@task.tags.each do |tag|
       /   td= tag.name
   / tr

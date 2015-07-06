@@ -90,7 +90,11 @@ class ProjectsController < ApplicationController
     puts "this is the select: #{complexity_id}"
     # mapping = Task.complexities[params[:complexity_id]]
     # puts "this is the enum mapping: #{mapping}"
-    @time_text = avg_time * Task.complexities[params[:complexity_id]]
+    if avg_time == 1
+        @time_text = 10
+    else
+      @time_text = avg_time * Task.complexities[params[:complexity_id]]
+    end
   end
 
   private
