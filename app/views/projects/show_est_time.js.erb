@@ -1,1 +1,5 @@
-$('#show_est_time').html("est hours: <%= @time_text %>")
+//var est_time = $("div[id*= <%= @task_id %> ] > div[id*='show_est_time']"); 
+var est_time = $("#<%= @task_id %>").parent().parent().next();
+$(est_time).html("est hours: <%= @time_text %>")
+
+// $('#show_est_time').html("est hours: <%= @time_text %>")
