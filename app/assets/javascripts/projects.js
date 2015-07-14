@@ -3,18 +3,18 @@ function getTime() {
     var task_id = $(this).children().children().attr('id');
     var tag_id = $(this).parent().parent().find('.tag_from_list option:selected');
     console.log(tag_id);
-      $.ajax({
-          url: "/newprojects/show_est_time",
-          data: {
-              tag_id: tag_id.text(),
-              complexity_id: $(this).find('option:selected').text(),
-              task_id: task_id
-          },
-          dataType: "script"
-      })
-  .done(function( data ) {
-    console.log(data);
-  })
+    $.ajax({
+        url: "/newprojects/show_est_time",
+        data: {
+            tag_id: tag_id.text(),
+            complexity_id: $(this).find('option:selected').text(),
+            task_id: task_id
+        },
+        dataType: "script"
+    })
+    .done(function(data) {
+      console.log(data);
+    })
   });
 }
 

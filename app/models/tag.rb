@@ -9,7 +9,7 @@ class Tag < ActiveRecord::Base
 		if Tag.where("tags.name = ? ", tag_id).any?
   			avg = Tag.joins(:tasks).where("tags.name = ? ", tag_id ).average("actual_time")
   		else
-  			avg = 1
+  			avg = 16
   		end
   		return avg
 	end
