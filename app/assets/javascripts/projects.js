@@ -1,22 +1,5 @@
-function getTime() {
-  $('.complexity_list').change(function() {
-    var task_id = $(this).children().children().attr('id');
-    var tag_id = $(this).parent().parent().find('.tag_from_list option:selected');
-    console.log(tag_id);
-    $.ajax({
-        url: "/newprojects/show_est_time",
-        data: {
-            tag_id: tag_id.text(),
-            complexity_id: $(this).find('option:selected').text(),
-            task_id: task_id
-        },
-        dataType: "script"
-    })
-    .done(function(data) {
-      console.log(data);
-    })
-  });
-}
+// variable to store total_time
+total_time = 0.0;
 
 $(document).ready(function() {
     $("#owner a.add_fields").
@@ -66,11 +49,11 @@ $(document).ready(function() {
     $('#tasks').bind('cocoon:before-insert', function(e,task_to_be_added) {
         console.log(task_to_be_added);
         task_to_be_added.fadeIn('slow');
-        getTime();
     });
 
     $('#tasks').bind('cocoon:after-insert', function(e, added_task) {
         //added_task.css("background","red");
+
     });
 
     $('#tasks').bind('cocoon:before-remove', function(e, task) {
@@ -78,7 +61,54 @@ $(document).ready(function() {
         task.fadeOut('slow');
     });
 
-    getTime();
+    // function to display est_time
+    // function will be called whenever there is a change for any class 'complexity_list' within body
+    $('body').on('change', ".complexity_list", function() {
+        // identify the current instance of task being filled in
+        var task_id = $(this).children().children().attr('id');
+        // pass the tag name
+        var tag_id = $(this).parent().parent().find('.tag_from_list option:selected');
+        console.log(tag_id);
+        $.ajax({
+            url: "/newprojects/show_est_time",
+            data: {
+                tag_id: tag_id.text(),
+                complexity_id: $(this).find('option:selected').text(),
+                task_id: task_id
+            },
+            dataType: "script",
+            success: function(time_text) {
+              //callback(time_text);
+              // $.each(time_text.info, function(){
+              //   var est_time = this.est_time;
+              //   console.log(time_text);
+              //   callback(time_text);
+              // });
+            },
+            error: function(req, status, err) {
+              console.log('something went wrong', status, err);
+            }
+        })
+        .done(function(time_text) {
+          console.log(time_text);
+        });
+    });
+
+    // get total project time
+    function callback(time_text) {
+      console.log('time_text: ' + time_text);
+      var time_text = parseFloat(time_text);
+      console.log(time_text);
+      total_time + time_text;
+      console.log(total_time);
+      $('#total-time').html("total_time");
+    }
+
+    // var total_time = 0;
+    // $('#show_est_time').each(function() {
+    //     total_time += parseFloat(this.value);
+    //     console.log(total_time);
+    // });
 
     //$('body').tabs();
 
@@ -122,9 +152,5 @@ $(document).ready(function() {
     //     dataType: "script"
     //   });
     // });
-
-    // working est_time display
-
-
 
 });
