@@ -34,8 +34,6 @@
           = f.association :owner, collection: Person.order(:name), prompt: 'Choose an existing owner'
         = link_to_add_association 'add new person as owner', f, :owner, class: 'btn btn-default'
 
-    .total-time
-      h4 Total time estimated: 
-        id="total-time"
+    .est-total-time style="border-style:double;"
     .links
       = f.button :submit, :disable_with => 'Please wait ...', class: 'btn btn-primary btn-block'

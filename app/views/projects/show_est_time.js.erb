@@ -1,5 +1,6 @@
 var est_time = $("#<%= @task_id %>").parent().parent().next();
-var time_text='<%=@time_text.to_json.html_safe%>';
+var time_text='<%=@time_text%>';
+console.log('from jserb: ' + time_text);
 $(est_time).html("<%= @time_text %>")
 
 // $('#show_est_time').html("est hours: <%= @time_text %>")
