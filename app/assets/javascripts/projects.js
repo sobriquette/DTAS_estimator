@@ -61,6 +61,8 @@ $(document).ready(function() {
         task.fadeOut('slow');
     });
 
+    //$('body').tabs();
+
     // function to display est_time
     // function will be called whenever there is a change for any class 'complexity_list' within body
     $('body').on('change', ".complexity_list", function() {
@@ -109,16 +111,14 @@ $(document).ready(function() {
       return est_total_time;
     };
 
-    //$('body').tabs();
-
     // function to hide or show add tag link
 
     // $(function() {
     //     function check_to_hide_or_show_add_link() {
-    //         if ($('#tags .nested-fields.task-tag-fields').length == 1) {
-    //             $('#tags .links a').hide();
+    //         if ($(".task-tag-fields a.add-tag").length == 1) {
+    //             $(".task-tag-fields a.add-tag").hide();
     //         } else {
-    //             $('#tags .links a').show();
+    //             $(".task-tag-fields a.add-tag").show();
     //         }
     //     }
 
