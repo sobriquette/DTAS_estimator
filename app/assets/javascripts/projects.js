@@ -121,23 +121,24 @@ $(document).ready(function() {
     // function to hide or show add tag link
 
     // $(function() {
-    //     function check_to_hide_or_show_add_link() {
-    //         if ($(".task-tag-fields a.add-tag").length == 1) {
-    //             $(".task-tag-fields a.add-tag").hide();
-    //         } else {
-    //             $(".task-tag-fields a.add-tag").show();
-    //         }
+    //   // limits the number of categories
+    //   $('.task-tags').bind('cocoon:after-insert', function() {
+    //     check_to_hide_or_show_add_link();
+    //   });
+
+    //   $('.task-tags').bind('cocoon:after-remove', function() {
+    //     check_to_hide_or_show_add_link();
+    //   });
+
+    //   check_to_hide_or_show_add_link();
+
+    //   function check_to_hide_or_show_add_link() {
+    //     if ($('.nested-fields.task-tag-fields').length === 1) {
+    //       $('.task-tags .links').hide();
+    //     } else {
+    //       $('.task-tags .links').show();
     //     }
-
-    //     $('#tags').bind('cocoon:after-insert', function() {
-    //         check_to_hide_or_show_add_link();
-    //     });
-
-    //     $('#tags').bind('cocoon:after-remove', function() {
-    //         check_to_hide_or_show_add_link();
-    //     });
-
-    //     check_to_hide_or_show_add_link();     
+    //   }
     // });
 
     // iterating through each dynamic association generated when adding a task

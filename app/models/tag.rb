@@ -4,6 +4,8 @@ class Tag < ActiveRecord::Base
 
 	accepts_nested_attributes_for :task_tags, :allow_destroy => true
 
+	validates_presence_of :name, length: { maximum: 50 }
+
 
 	def self.est_time(tag_id)
 		if Tag.where("tags.name = ? ", tag_id).any? && !(Tag.joins(:tasks).where("tags.name = ? ", tag_id ).where("actual_time").empty?)
