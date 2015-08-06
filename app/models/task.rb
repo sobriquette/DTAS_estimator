@@ -33,7 +33,7 @@ class Task < ActiveRecord::Base
 	  		# calculate est time based on complexity selected
 	  		est_time = avg * self[:complexity]
 	  	else
-	  		est_time = 10
+	  		est_time = 16
 	  	end
   		return est_time
 	end
