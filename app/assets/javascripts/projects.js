@@ -1,5 +1,3 @@
-// variable to store total_time
-est_total_time = 0.0;
 
 $(document).ready(function() {
     $("#owner a.add_fields").
@@ -79,37 +77,46 @@ $(document).ready(function() {
                 task_id: task_id
             },
             dataType: "script",
-            // success: function(data) {
-            //   callback(data);
-            //   // $.each(time_text.info, function(){
-            //   //   var est_time = this.est_time;
-            //   //   console.log(time_text);
-            //   //   callback(time_text);
-            //   // });
-            // },
             error: function(req, status, err) {
               console.log('something went wrong', status, err);
             }
         })
         .done(function(data) {
-          console.log('from done function: ' + time_text);
-          time_text = parseFloat(time_text);
-          est_total_time = totalTime(time_text);
-          console.log('est_total_time returned: ' + est_total_time);
-          // passing est_total_time value to project#new
-          $('.est-total-time').html("Total time estimated: " + est_total_time);
+          console.log("in the done fn")
+          var totalEst = getTotalTime();
+          console.log("total time returned: " + totalEst);
+          $('.est-total-time').html("Total time: " + totalEst);
+          // console.log('from done function: ' + time_text);
+          // time_text = parseFloat(time_text);
+          // est_total_time = totalTime(time_text);
+          // console.log('est_total_time returned: ' + est_total_time);
+          // // passing est_total_time value to project#new
+          // // call function to add up all inputs
+          // $('.est-total-time').html("Total time estimated: " + est_total_time);
         });
     });
 
     // get total project time
-    function totalTime(data) {
-      console.log('time_text from done function: ' + time_text);
-      console.log('time_text type: ' + typeof time_text);
-      console.log('total_time type: ' + typeof est_total_time);
-      est_total_time = est_total_time + time_text;
-      console.log('est_total_time calculated: ' + est_total_time);
-      return est_total_time;
-    };
+    // function totalTime(data) {
+    //   console.log('time_text from done function: ' + time_text);
+    //   console.log('time_text type: ' + typeof time_text);
+    //   console.log('total_time type: ' + typeof est_total_time);
+    //   est_total_time = est_total_time + time_text;
+    //   console.log('est_total_time calculated: ' + est_total_time);
+    //   return est_total_time;
+    // };
+
+    function getTotalTime() {
+      var totalTime = 0;
+      console.log("in the getTotalTime fn");
+      $('.show_est_time').each(
+        function(){
+          console.log(jQuery(this).text());
+          totalTime += parseFloat(jQuery(this).text());
+        }
+      );     
+      return totalTime;
+    }
 
     // function to hide or show add tag link
 
