@@ -113,26 +113,32 @@ $(document).ready(function() {
 
     // function to hide or show add tag link
 
-    // $(function() {
-    //   // limits the number of categories
-    //   $('.task-tags').bind('cocoon:after-insert', function() {
-    //     check_to_hide_or_show_add_link();
-    //   });
+    $('body').on('change', ".nested-fields.task-tag-fields", function() {
+      // limits the number of categories
+      $('.btn.btn-default.add-tag-btn.add_fields').bind('cocoon:after-insert', function() {
+        check_to_hide_or_show_add_link();
+      });
 
-    //   $('.task-tags').bind('cocoon:after-remove', function() {
-    //     check_to_hide_or_show_add_link();
-    //   });
+      $('.btn.btn-default.add-tag-btn.add_fields').bind('cocoon:after-remove', function() {
+        check_to_hide_or_show_add_link();
+      });
 
-    //   check_to_hide_or_show_add_link();
+      check_to_hide_or_show_add_link();
+    });
 
-    //   function check_to_hide_or_show_add_link() {
-    //     if ($('.nested-fields.task-tag-fields').length === 1) {
-    //       $('.task-tags .links').hide();
-    //     } else {
-    //       $('.task-tags .links').show();
-    //     }
-    //   }
-    // });
+    function check_to_hide_or_show_add_link() {
+      $('.nested-fields.well.well-compact').each(
+        function() {
+          if ($('.nested-fields.task-tag-fields').length >= 1) {
+            $('.btn.btn-default.add-tag-btn.add_fields').hide();
+            // $('.btn.btn-default.add-tag-btn.add_fields').css("background","green");
+          } else {
+            $('.btn.btn-default.add-tag-btn.add_fields').show();
+            // $('.btn.btn-default.add-tag-btn.add_fields').css("background","red");
+          }
+        }
+      );
+    };
 
     // iterating through each dynamic association generated when adding a task
     // $(document).on("change", "input[class^=tag_from_list], input[class^=complexity]", function() {
