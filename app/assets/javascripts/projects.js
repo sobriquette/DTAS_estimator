@@ -112,33 +112,83 @@ $(document).ready(function() {
     };
 
     // function to hide or show add tag link
-
-    $('body').on('change', ".nested-fields.task-tag-fields", function() {
-      // limits the number of categories
-      $('.btn.btn-default.add-tag-btn.add_fields').bind('cocoon:after-insert', function() {
-        check_to_hide_or_show_add_link();
-      });
-
-      $('.btn.btn-default.add-tag-btn.add_fields').bind('cocoon:after-remove', function() {
-        check_to_hide_or_show_add_link();
-      });
-
-      check_to_hide_or_show_add_link();
+    // var curr_tag = $('.nested-fields.task-tag-fields').children().children().children().children().attr('id');
+    // console.log("this is the curr_tag", curr_tag);
+    // var remove_tag_button = $(curr_tag).parent().parent().find(".remove-tag");
+    // function render_tag_field_if_removed() {
+    //   if $(remove_tag_button).click(function() {
+    //     alert("The remove button for this current tag was clicked.");
+    //     console.log("The remove button for this current tag was clicked.");
+    //   });
+    // };
+    
+    $('.btn.btn-default.add-tag-btn.add_fields').hide();
+    check_removed_to_hide_or_show_add_link();
+    $('.btn.btn-default.add_fields').bind('click','cocoon:before-insert', function() {
+      console.log('add task has been clicked');
+      console.log('this is: ' + $(this).attr('class'));
+      add_tag = $(this).parent().prev().find('.btn.btn-default.add-tag-btn.add_fields');
+      console.log('this is: ' + $(add_tag).attr('class'));
+      $(add_tag).hide();
+      check_removed_to_hide_or_show_add_link();
     });
 
-    function check_to_hide_or_show_add_link() {
-      $('.nested-fields.well.well-compact').each(
-        function() {
-          if ($('.nested-fields.task-tag-fields').length >= 1) {
-            $('.btn.btn-default.add-tag-btn.add_fields').hide();
-            // $('.btn.btn-default.add-tag-btn.add_fields').css("background","green");
-          } else {
-            $('.btn.btn-default.add-tag-btn.add_fields').show();
-            // $('.btn.btn-default.add-tag-btn.add_fields').css("background","red");
-          }
-        }
-      );
+    // $('.remove-tag').on('click', function() {
+    //   console.log('remove tag clicked');
+    //   $('.btn.btn-default.add-tag-btn.add_fields').show();
+    // });
+
+    // $('.btn.btn-default.add-tag-btn.add_fields').on('click', function() {
+    //   console.log('add-tag clicked' + 1);
+    //   $('.btn.btn-default.add-tag-btn.add_fields').hide();
+    // });
+
+    function check_removed_to_hide_or_show_add_link() {
+      $('.remove-tag').on('click', function() {
+        console.log('this is: ' + $(this).attr('class'));
+        // $('.btn.btn-default.add-tag-btn.add_fields').show();
+        add_tag = $(this).parent().parent().next().find('a');
+        add_tag.show();
+        console.log('this is: ' + $(add_tag).attr('class'));
+        $(add_tag).on('click', function() {
+          console.log('this is: ' + $(this).attr('class'));
+          $(this).hide();
+          check_removed_to_hide_or_show_add_link();
+        });
+        // $('.btn.btn-default.add-tag-btn.add_fields').on('click', function() {
+        //   console.log('the add-tag button has been clicked after removal');
+        //   $('this').hide();
+        //   check_removed_to_hide_or_show_add_link();
+        // });
+      });
     };
+
+    // $('body').on('change', ".nested-fields.task-tag-fields", function() {
+    //   // limits the number of categories
+    //   $('.btn.btn-default.add-tag-btn.add_fields').bind('cocoon:after-insert', function() {
+    //     check_to_hide_or_show_add_link();
+    //   });
+
+    //   $('.btn.btn-default.add-tag-btn.add_fields').bind('cocoon:after-remove', function() {
+    //     check_to_hide_or_show_add_link();
+    //   });
+
+    //   check_to_hide_or_show_add_link();
+    // });
+
+    // function check_to_hide_or_show_add_link() {
+    //   $('.nested-fields.well.well-compact').each(
+    //     function() {
+    //       if ($('.nested-fields.task-tag-fields').length === 1) {
+    //         // $('.btn.btn-default.add-tag-btn.add_fields').show();
+    //         $('.btn.btn-default.add-tag-btn.add_fields').css("background","green");
+    //       } else {
+    //         // $('.btn.btn-default.add-tag-btn.add_fields').hide();
+    //         $('.btn.btn-default.add-tag-btn.add_fields').css("background","red");
+    //       }
+    //     }
+    //   );
+    // };
 
     // iterating through each dynamic association generated when adding a task
     // $(document).on("change", "input[class^=tag_from_list], input[class^=complexity]", function() {
