@@ -110,58 +110,50 @@ $(document).ready(function() {
       console.log('est_total_time calculated: ' + est_total_time);
       return est_total_time;
     };
-
-    // function to hide or show add tag link
-    // var curr_tag = $('.nested-fields.task-tag-fields').children().children().children().children().attr('id');
-    // console.log("this is the curr_tag", curr_tag);
-    // var remove_tag_button = $(curr_tag).parent().parent().find(".remove-tag");
-    // function render_tag_field_if_removed() {
-    //   if $(remove_tag_button).click(function() {
-    //     alert("The remove button for this current tag was clicked.");
-    //     console.log("The remove button for this current tag was clicked.");
-    //   });
-    // };
     
-    $('.btn.btn-default.add-tag-btn.add_fields').hide();
-    check_removed_to_hide_or_show_add_link();
-    $('.btn.btn-default.add_fields').bind('click','cocoon:before-insert', function() {
-      console.log('add task has been clicked');
+    // hide add-tag button to prevent multiple categories per task
+    $('.links.add-tag').find('a').hide();
+    $('#tasks').on('click', '.remove-tag', function() {
       console.log('this is: ' + $(this).attr('class'));
-      add_tag = $(this).parent().prev().find('.btn.btn-default.add-tag-btn.add_fields');
+      // $('.btn.btn-default.add-tag-btn.add_fields').show();
+      add_tag = $(this).parent().parent().next().find('a');
+      add_tag.show();
       console.log('this is: ' + $(add_tag).attr('class'));
-      $(add_tag).hide();
-      check_removed_to_hide_or_show_add_link();
+    });
+    // $('.remove-tag').on('click', function() {
+    //     console.log('this is: ' + $(this).attr('class'));
+    //     // $('.btn.btn-default.add-tag-btn.add_fields').show();
+    //     add_tag = $(this).parent().parent().next().find('a');
+    //     add_tag.show();
+    //     console.log('this is: ' + $(add_tag).attr('class'));
+    // });
+
+    $('#tasks').on('click', '.btn.btn-default.add-tag-btn.add_fields', function() {
+      console.log('this is: ' + $(this).attr('class'));
+      $(this).hide();
     });
 
-    // $('.remove-tag').on('click', function() {
-    //   console.log('remove tag clicked');
-    //   $('.btn.btn-default.add-tag-btn.add_fields').show();
+    // $('.links.add-tag').find('a').on('click', function() {
+    //   console.log('this is: ' + $(this).attr('class'));
+    //   $(this).hide();
     // });
 
-    // $('.btn.btn-default.add-tag-btn.add_fields').on('click', function() {
-    //   console.log('add-tag clicked' + 1);
-    //   $('.btn.btn-default.add-tag-btn.add_fields').hide();
+    // $('.links.add-task').find('a').on('click', function() {
+    //   console.log('add task has been clicked');
+    //   console.log('this is: ' + $(this).attr('class'));
+    //   add_tag = $(this).parent().prev().find('.btn.btn-default.add-tag-btn.add_fields');
+    //   console.log('this is: ' + $(add_tag).attr('class'));
+    //   $(add_tag).hide();
     // });
 
-    function check_removed_to_hide_or_show_add_link() {
-      $('.remove-tag').on('click', function() {
-        console.log('this is: ' + $(this).attr('class'));
-        // $('.btn.btn-default.add-tag-btn.add_fields').show();
-        add_tag = $(this).parent().parent().next().find('a');
-        add_tag.show();
-        console.log('this is: ' + $(add_tag).attr('class'));
-        $(add_tag).on('click', function() {
-          console.log('this is: ' + $(this).attr('class'));
-          $(this).hide();
-          check_removed_to_hide_or_show_add_link();
-        });
-        // $('.btn.btn-default.add-tag-btn.add_fields').on('click', function() {
-        //   console.log('the add-tag button has been clicked after removal');
-        //   $('this').hide();
-        //   check_removed_to_hide_or_show_add_link();
-        // });
-      });
-    };
+    // function check_removed_to_hide_or_show_add_link() {
+    //     // $('.btn.btn-default.add-tag-btn.add_fields').on('click', function() {
+    //     //   console.log('the add-tag button has been clicked after removal');
+    //     //   $('this').hide();
+    //     //   check_removed_to_hide_or_show_add_link();
+    //     // });
+    //   });
+    // };
 
     // $('body').on('change', ".nested-fields.task-tag-fields", function() {
     //   // limits the number of categories
@@ -189,24 +181,5 @@ $(document).ready(function() {
     //     }
     //   );
     // };
-
-    // iterating through each dynamic association generated when adding a task
-    // $(document).on("change", "input[class^=tag_from_list], input[class^=complexity]", function() {
-    //     $("input[class^=complexity]").trigger("change");
-    // });
-
-    // $(document).on("change", "input[class^=complexity]", function() {
-    //   var complexity = $("option:selected", this).closest("div").siblings().find("input[class^=complexity]");
-    //   var tag = $("option:selected", this).closest("div").siblings().find("input[class^=tag_from_list]");
-    //   // call to AJAX to do model calculations for est_time
-    //   $.ajax({
-    //     url: "/newprojects/show_est_time",
-    //     data: {
-    //       tag_id: tag.text(),
-    //       complexity_id: complexity.text()
-    //     }
-    //     dataType: "script"
-    //   });
-    // });
 
 });
