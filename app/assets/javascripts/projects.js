@@ -17,17 +17,17 @@ $(document).ready(function() {
            $("#owner a.add_fields").show();
          });
 
-    $(".task_tags a.add_fields").
+    $("#tags a.add_fields").
       data("association-insertion-position", 'before').
       data("association-insertion-node", 'this');
 
-    $('.task_tags').bind('cocoon:after-insert',
+    $('#tags').bind('cocoon:after-insert',
          function(e, tag) {
              console.log('inserting new tag ...');
-             $(".task_tags .add_fields").
+             $(".task-tag-fields a.add-tag").
                  data("association-insertion-position", 'after').
                  data("association-insertion-node", 'this');
-             $(this).find('.task_tags').bind('cocoon:after-insert',
+             $(this).find('.task-tag-fields').bind('cocoon:after-insert',
                   function() {
                     console.log('insert new tag ...');
                     console.log($(this));
@@ -36,7 +36,7 @@ $(document).ready(function() {
                   });
          });
 
-    $('.task_tags').bind('cocoon:after-insert',
+    $('.task-tag-fields').bind('cocoon:after-insert',
         function(e) {
             console.log('replace OLD tag ...');
             e.stopPropagation();
@@ -112,19 +112,19 @@ $(document).ready(function() {
     };
     
     // hide add-tag button to prevent multiple categories per task
-    // $('.links.add-tag').find('a').hide();
-    // $('#tasks').on('click', '.remove-tag', function() {
-    //   console.log('this is: ' + $(this).attr('class'));
-    //   // $('.btn.btn-default.add-tag-btn.add_fields').show();
-    //   add_tag = $(this).parent().parent().next().find('a');
-    //   add_tag.show();
-    //   console.log('this is: ' + $(add_tag).attr('class'));
-    // });
+    $('.links.add-tag').find('a').hide();
+    $('#tasks').on('click', '.remove-tag', function() {
+      console.log('this is: ' + $(this).attr('class'));
+      // $('.btn.btn-default.add-tag-btn.add_fields').show();
+      add_tag = $(this).parent().parent().next().find('a');
+      add_tag.show();
+      console.log('this is: ' + $(add_tag).attr('class'));
+    });
 
-    // $('#tasks').on('click', '.btn.btn-default.add-tag-btn.add_fields', function() {
-    //   console.log('this is: ' + $(this).attr('class'));
-    //   $(this).hide();
-    // });
+    $('#tasks').on('click', '.btn.btn-default.add-tag-btn.add_fields', function() {
+      console.log('this is: ' + $(this).attr('class'));
+      $(this).hide();
+    });
 
     // $('.links.add-tag').find('a').on('click', function() {
     //   console.log('this is: ' + $(this).attr('class'));
