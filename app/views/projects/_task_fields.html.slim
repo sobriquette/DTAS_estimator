@@ -3,8 +3,8 @@
     .task_tags style="position: relative; left: -5px;"
       = f.simple_fields_for :task_tags do |task_tag|
           = render 'task_tag_fields', :f => task_tag
-      .links
-        = link_to_add_association 'add a tag', f, :task_tags, class: 'btn btn-default'
+      .links.add-tag
+        = link_to_add_association 'add a tag', f, :task_tags, class: 'btn btn-default add-tag-btn'
     .form-inline
       = f.input :name, label: false, placeholder: 'add a name', class: 'form-control'
       = f.input :description, label: false, placeholder: 'add a description', class: 'form-control'

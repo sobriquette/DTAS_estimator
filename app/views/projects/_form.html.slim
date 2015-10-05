@@ -20,7 +20,7 @@
       #tasks.tab-pane.active role='tabpanel'
         = f.simple_fields_for :tasks do |task|
           = render 'task_fields', :f => task
-        .links
+        .links.add-task
           = link_to_add_association 'add task', f, :tasks, class: 'btn btn-default'
 
       #people.tab-pane role='tabpanel'

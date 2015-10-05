@@ -86,26 +86,10 @@ $(document).ready(function() {
           var totalEst = getTotalTime();
           console.log("total time returned: " + totalEst);
           $('.est-total-time').html("Total time: " + totalEst);
-          // console.log('from done function: ' + time_text);
-          // time_text = parseFloat(time_text);
-          // est_total_time = totalTime(time_text);
-          // console.log('est_total_time returned: ' + est_total_time);
-          // // passing est_total_time value to project#new
-          // // call function to add up all inputs
-          // $('.est-total-time').html("Total time estimated: " + est_total_time);
         });
     });
 
     // get total project time
-    // function totalTime(data) {
-    //   console.log('time_text from done function: ' + time_text);
-    //   console.log('time_text type: ' + typeof time_text);
-    //   console.log('total_time type: ' + typeof est_total_time);
-    //   est_total_time = est_total_time + time_text;
-    //   console.log('est_total_time calculated: ' + est_total_time);
-    //   return est_total_time;
-    // };
-
     function getTotalTime() {
       var totalTime = 0;
       console.log("in the getTotalTime fn");
@@ -116,48 +100,19 @@ $(document).ready(function() {
         }
       );     
       return totalTime;
-    }
+    
+    // hide add-tag button to prevent multiple categories per task
+    $('.links.add-tag').find('a').hide();
+    $('#tasks').on('click', '.remove-tag', function() {
+      console.log('this is: ' + $(this).attr('class'));
+      // $('.btn.btn-default.add-tag-btn.add_fields').show();
+      add_tag = $(this).parent().parent().next().find('a');
+      add_tag.show();
+      console.log('this is: ' + $(add_tag).attr('class'));
+    });
 
-    // function to hide or show add tag link
-
-    // $(function() {
-    //   // limits the number of categories
-    //   $('.task-tags').bind('cocoon:after-insert', function() {
-    //     check_to_hide_or_show_add_link();
-    //   });
-
-    //   $('.task-tags').bind('cocoon:after-remove', function() {
-    //     check_to_hide_or_show_add_link();
-    //   });
-
-    //   check_to_hide_or_show_add_link();
-
-    //   function check_to_hide_or_show_add_link() {
-    //     if ($('.nested-fields.task-tag-fields').length === 1) {
-    //       $('.task-tags .links').hide();
-    //     } else {
-    //       $('.task-tags .links').show();
-    //     }
-    //   }
-    // });
-
-    // iterating through each dynamic association generated when adding a task
-    // $(document).on("change", "input[class^=tag_from_list], input[class^=complexity]", function() {
-    //     $("input[class^=complexity]").trigger("change");
-    // });
-
-    // $(document).on("change", "input[class^=complexity]", function() {
-    //   var complexity = $("option:selected", this).closest("div").siblings().find("input[class^=complexity]");
-    //   var tag = $("option:selected", this).closest("div").siblings().find("input[class^=tag_from_list]");
-    //   // call to AJAX to do model calculations for est_time
-    //   $.ajax({
-    //     url: "/newprojects/show_est_time",
-    //     data: {
-    //       tag_id: tag.text(),
-    //       complexity_id: complexity.text()
-    //     }
-    //     dataType: "script"
-    //   });
-    // });
-
+    $('#tasks').on('click', '.btn.btn-default.add-tag-btn.add_fields', function() {
+      console.log('this is: ' + $(this).attr('class'));
+      $(this).hide();
+    });
 });
