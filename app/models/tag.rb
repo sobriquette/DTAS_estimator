@@ -8,8 +8,12 @@ class Tag < ActiveRecord::Base
 
 
 	def self.est_time(tag_id)
-		actual_time_bool = Tag.joins(:tasks).where("tags.name in (?) ", tag_id).where("actual_time").blank?
-		if Tag.where("tags.name in (?) ", tag_id).any? && !(actual_time_bool)
+		# actual_time_bool_blank = Tag.joins(:tasks).where("tags.name in (?) ", tag_id).where("actual_time").blank?
+		actual_time_bool_other = Tag.joins(:tasks)
+									.where("tags.name in (?) ", tag_id)
+									.where("actual_time IS NOT NULL")
+									.where("actual_time <> ''") 
+		if Tag.where("tags.name in (?) ", tag_id).any? && (actual_time_bool_other.any?)
   			avg = Tag.joins(:tasks).where("tags.name in (?) ", tag_id ).average("actual_time")
   		else
   			avg = 16
