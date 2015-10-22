@@ -26,14 +26,18 @@ class Task < ActiveRecord::Base
   		# avg = Task.find_by_sql("SELECT AVG(tasks.actual_time * tasks.complexity) FROM tasks INNER JOIN task_tags 
   		# 	  									ON task_tags.task_id = tasks.id INNER JOIN tags 
   		# 	  									ON tags.id = task_tags.tag_id WHERE tags.name = 'Navigation'")
-
-  		if self.tags.exists? && (Task.joins(:tags).where("tags.name = ? ", self.tags.first.name).count > 1)
+		min_est_time = 16
+		null_tag_bool = Task.joins(:tags).where("tags.name in (?)", self.tags.first.name).where("actual_time").blank?
+  		if self.tags.exists? && (Task.joins(:tags).where("tags.name = ? ", self.tags.first.name).count > 0) && !null_tag_bool
+  			puts "actual_time for this task: #{self.actual_time}"
+  			puts "complexity for this task: #{self.complexity}"
 	  		# average actual times
-	  		avg = Task.joins(:tags).where("tags.name = ? ", self.tags.first.name ).average("actual_time")
+	  		avg = Task.joins(:tags).where("tags.name = ? ", self.tags.first.name ).where("actual_time IS NOT NULL").average("actual_time")
+	  		puts "avg for this #{self.name} is #{avg}"
 	  		# calculate est time based on complexity selected
 	  		est_time = avg * self[:complexity]
 	  	else
-	  		est_time = 16
+	  		est_time = min_est_time * self[:complexity]
 	  	end
   		return est_time
 	end
