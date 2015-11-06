@@ -98,6 +98,9 @@ $(document).ready(function() {
     return totalTime;
   }
   
+  // remove blank dropdown item in list
+  // $('select option[value=""]').remove();
+
   // hide add-tag button to prevent multiple categories per task
   $('.links.add-tag').find('a').hide();
   $('#tasks').on('click', '.remove-tag', function() {

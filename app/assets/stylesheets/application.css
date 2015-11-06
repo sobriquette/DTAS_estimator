@@ -50,3 +50,8 @@ td .btn {
 .well.well-compact {
     margin: 5px;
 }
+
+.est-total-time {
+  font-size: 25px;
+  margin: 5px;
+}

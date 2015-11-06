@@ -1,57 +1,60 @@
 - provide(:title, @project.name)
 
-table.table
-  tr
-    td Name
-    td
-      =@project.name
-  tr
-    td Owned by
-    td
-      = (@project.owner ? @project.owner.try(:name) : 'no owner yet')
+.project-header
+  h1 =@project.name
+  center
+    h4 
+      |Owned by: 
+      =(@project.owner ? @project.owner.try(:name) : 'no owner yet')
 
+/ table.table
+/   tr
+/     td Name
+/     td
+/       =@project.name
+/   tr
+/     td Owned by
+/     td
+/       = (@project.owner ? @project.owner.try(:name) : 'no owner yet')
 
-h3 Tasks
-
-p
-  | List all the tasks here
-
-table.table
-  tr
-    td Task
-    td Description
-    td Complexity
-    td Estimated Hours
-    td Actual Hours
-    td Completed?
-    td Category
-  -@project.tasks.each do |task|
+.project-tasks
+  h3 Tasks
+  table.table-striped
     tr
-      td= task.name
-      td= task.description
-      td= task.complexity
-      td= task.est_time
-      td= task.actual_time
-      td= task.done
-      - if task.tags.exists?
-        td= task.tags.first.name
-      - else
-        td= ""
-      / -@task.tags.each do |tag|
-      /   td= tag.name
-  / tr
-  /   td= @project.task.sum_est_time
+      th Task
+      th Description
+      th Complexity
+      th Estimated Hours
+      th Actual Hours
+      th Completed?
+      th Category
+    -@project.tasks.each do |task|
+      tr
+        td= task.name
+        td= task.description
+        td= task.complexity
+        td= task.est_time
+        td= task.actual_time
+        td= task.done
+        - if task.tags.exists?
+          td= task.tags.first.name
+        - else
+          td= ""
+        / -@task.tags.each do |tag|
+        /   td= tag.name
+    / tr
+    /   td= @project.task.sum_est_time
 
 
+.project-people
+  h3 People
 
-h3 People
-
-table.table
-  -@project.people.each do |person|
-    tr
-      td= person.name
-      td= person.role
-      td= person.description
+  table.table
+    -@project.people.each do |person|
+      tr
+        td= person.name
+        td= person.role
+        td= person.description
 
 .links
   = link_to 'Edit  ', edit_project_path(@project)

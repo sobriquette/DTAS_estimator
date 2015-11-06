@@ -1,0 +1,73 @@
+/*
+  Place all the styles related to the matching controller here.
+  They will automatically be included in application.css.
+*/
+/* @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300italic,300,400italic,600,600italic,700,700italic,800,800italic);*/
+
+/* Global Assets */
+html,
+body {
+	font-family: 'Open Sans', sans-serif;
+}
+
+
+/* Components */
+.navbar-custom {
+	background-color: #e74c3c;
+	font-weight: 300;
+	li a {
+		color: #fff;
+		&:hover {
+		    background-color: #CC3300
+		}
+		
+	}
+}
+
+.btn {
+	&.btn-new {
+		background-color: #e74c3c;
+		border: none;
+		color: #fff;
+		font-weight: 300;
+		&:hover {
+			background-color: #CC3300;
+		}
+	}
+	&.btn-update {
+	    background-color: #fff;
+	    border: #E4E4E4 solid thin;
+	    color: #000;
+	    &:hover {
+	   		background-color: #E4E4E4;
+	    }
+	}
+	&.btn-primary {
+	}
+}
+
+.footer {
+	margin-top: 150px;
+}
+
+.footer-li-left {
+	margin: 5px;
+	float: left;
+}
+
+.footer-li-right {
+	margin: 5px; 
+	float: right;
+	a {
+		color: #e74c3c;
+		&:hover {
+			color: #CC3300;
+			text-decoration: none;
+		}
+	}
+}
+
+.td-project-actions{
+	margin-right: 10px;
+	font-weight: 500;
+}
