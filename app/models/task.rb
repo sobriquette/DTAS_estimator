@@ -28,9 +28,12 @@ class Task < ActiveRecord::Base
   		# 	  									ON tags.id = task_tags.tag_id WHERE tags.name = 'Navigation'")
 		min_est_time = 16
 		#null_tag_bool = Task.joins(:tags).where("tags.name in (?)", self.tags.first.name).where("actual_time").blank?
-		count_tags = Task.joins(:tags).where("tags.name in (?)", self.tags.first.name).count
-		null_tag_bool_other = Task.joins(:tags).where("tags.name in (?)", self.tags.first.name).try("actual_time")
-  		if self.tags.exists? && (count_tags > 0) && !null_tag_bool_other
+		# count_tags = Task.joins(:tags).where("tags.name in (?)", self.tags.first.name).count
+		# null_tag_bool_other = Task.joins(:tags).where("tags.name in (?)", self.tags.first.name).try("actual_time")
+  		if self.tags.exists? && 
+  			(Task.joins(:tags).where("tags.name in (?)", self.tags.first.name).count > 0) && 
+  			!(Task.joins(:tags).where("tags.name in (?)", self.tags.first.name).try("actual_time"))
+  			
   			puts "actual_time for this task: #{self.actual_time}"
   			puts "complexity for this task: #{self.complexity}"
 	  		# average actual times
