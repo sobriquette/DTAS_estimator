@@ -2,7 +2,7 @@
 
 	.form-inline
 		.tag_from_list style="display: inline;"
-			= f.association :tag, collection: Tag.order(:name), prompt: 'Choose an existing tag', label: false, id: 'tag_id'
+			= f.association :tag, collection: Tag.order(:name), prompt: 'Choose an existing tag', label: false, id: 'tag_id', include_blank: false
 		= link_to_add_association 'or create a new tag', f, :tag, class: 'add-tag', 'data-association-insertion-method' => 'before', 'data-association-insertion-node' => 'this'
 		= link_to_remove_association f, class: 'remove-tag btn btn-default btn-xs' do 
 			.glyphicon.glyphicon-remove

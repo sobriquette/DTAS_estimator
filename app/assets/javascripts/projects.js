@@ -59,7 +59,7 @@ $(document).ready(function() {
 
   // function to display est_time
   // function will be called whenever there is a change for any class 'complexity_list' within body
-  $('body').on('change', ".complexity_list", function() {
+  $('body').on('click', ".complexity_list", function() {
     // identify the current instance of task being filled in
     var task_id = $(this).children().children().attr('id');
     // pass the tag name
